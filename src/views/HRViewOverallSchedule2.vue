@@ -20,6 +20,12 @@ why<template>
             <p class="mb-0 text-sm font-weight-bold">{{ managerPosition }}, {{ managerDept }}</p>
           </div>
         </div>
+        <div class="col-auto my-auto">
+          <vsud-badge :color="this.$route.query.managerStatus === 'In-Office' ? 'success' : 'secondary'" variant="gradient" size="sm"
+            class="mx-auto">
+            {{ this.$route.query.managerStatus }}
+          </vsud-badge>
+        </div>
         <div class="mx-auto mt-3 col-lg-6 col-md-6 my-sm-auto ms-sm-auto me-sm-0">
           <div class="nav-wrapper position-relative end-0 d-flex">
             <ul class="p-1 bg-transparent nav nav-pills nav-fill me-2" role="tablist" style="flex: 1;">

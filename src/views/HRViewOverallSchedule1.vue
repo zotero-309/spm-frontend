@@ -19,6 +19,13 @@
             <p class="mb-0 text-sm font-weight-bold">CEO / MD</p>
           </div>
         </div>
+        <div class="col-auto my-auto">
+          <vsud-badge :color="managerStatus === 'In-Office' ? 'success' : 'secondary'" variant="gradient" size="sm"
+            class="mx-auto">
+            {{ managerStatus }}
+          </vsud-badge>
+        </div>
+
         <div class="mx-auto mt-3 col-lg-6 col-md-6 my-sm-auto ms-sm-auto me-sm-0">
           <div class="nav-wrapper position-relative end-0 d-flex">
             <ul class="p-1 bg-transparent nav nav-pills nav-fill me-2" role="tablist" style="flex: 1;">
@@ -103,13 +110,12 @@
                   <div class="row">
                     <div v-for="(employee, index) in employees" :key="employee.id"
                       class="mb-4 col-xl-3 col-md-6 mb-xl-0">
-                      {{ employee.status }}
                       <projects-card :img="images[employee.dept]" :number="index + 1" :title="employee.dept"
                         scheduleLink="/HRViewOverallSchedule2" :managerId="employee.id" :managerName="employee.name"
-                        :managerPosition="employee.position" :managerRole="employee.role" :managerStatus="employee.status" 
-                        :img-team1="team1" title-team1="Elena Morison" :img-team2="team2" title-team2="Ryan Milly"
-                        :img-team3="team3" title-team3="Nick Daniel" :img-team4="team4" title-team4="Peterson"
-                        class="pb-4" />
+                        :managerPosition="employee.position" :managerRole="employee.role"
+                        :managerStatus="employee.status" :img-team1="team1" title-team1="Elena Morison"
+                        :img-team2="team2" title-team2="Ryan Milly" :img-team3="team3" title-team3="Nick Daniel"
+                        :img-team4="team4" title-team4="Peterson" class="pb-4" />
                     </div>
                   </div>
                 </div>
@@ -164,6 +170,7 @@ import team4 from "@/assets/img/team-4.jpg";
 import bgImg from "@/assets/img/curved-images/curved14.jpg"
 import ProjectsCard from "./components/ProjectOverviewCard.vue";
 import VsudProgress from "@/components/VsudProgress.vue";
+import VsudBadge from "@/components/VsudBadge.vue";
 import setNavPills from "@/assets/js/nav-pills.js";
 import setTooltip from "@/assets/js/tooltip.js";
 
@@ -176,7 +183,8 @@ export default {
     ProfileCard,
     VsudAvatar,
     ProjectsCard,
-    VsudProgress
+    VsudProgress,
+    VsudBadge
   },
   data() {
     return {
@@ -203,8 +211,8 @@ export default {
       ceoId: "",  // Initialize with null or an empty string
       employees: [], // To hold employee data from API
       percentStrength: "...",
-      officeStrength:"",
-      totalStrength:"",
+      officeStrength: "",
+      totalStrength: "",
       selectedDate: "",
       selectedSlot: "",
       managerId: "130002",  // Initialize with null or an empty string
@@ -279,7 +287,7 @@ export default {
       console.log("today's hours", hour);
       // Determine if it's am or pm based on the current time
       const timeKey = hour < 14 ? "am" : "pm";
-      console.log("slot",timeKey);
+      console.log("slot", timeKey);
       // Calculate percentage strength based on selected timing
       const officeCount = events[timeKey].office;
       this.officeStrength = officeCount;
@@ -304,7 +312,7 @@ export default {
         let pmOffice = record.pm.office; // Access the 'office' value in 'pm'
         const today = new Date();
         const todayDate = today.toLocaleDateString('en-CA');
-        if (date==todayDate){
+        if (date == todayDate) {
           this.calculatePercentage(record, today);
         }
 
@@ -398,7 +406,7 @@ export default {
             managerDept: managerDept,
             selectedDate: event.detail.itemObj.eventDate,
             selectedSlot: event.detail.itemObj.timeSlot,
-            strengthLabel:event.detail.itemObj.label
+            strengthLabel: event.detail.itemObj.label
           };
           router.push({
             path: '/HROverallEmployeeList', // Ensure the name matches exactly
@@ -477,5 +485,4 @@ export default {
     transform: rotate(360deg);
   }
 }
-
 </style>
