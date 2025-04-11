@@ -360,23 +360,19 @@ export default {
       return Array.from(uniqueCountries); // Return the array
     },
     availableStatuss() {
-      // Define each status element
-      const WFH = document.getElementById("WFH");
-      const InOffice = document.getElementById("In-Office");
-
       // Put elements in an object for easier reference
       const statusElements = {
-        WFH,
-        InOffice,
+        WFH: document.getElementById("WFH"),
+        'In-Office': document.getElementById("In-Office"),
       };
 
       // Create a set of unique countries based on employees' countries
-      const uniqueStatus = new Set(this.employees.map(emp => emp.status));
-      console.log("Available Status:", Array.from(uniqueStatus));
+      const uniqueStatuses = [...new Set(this.employees.map(emp => emp.status))];
+      console.log("Available Status:", uniqueStatuses);
 
       // Iterate over each country element
       for (const [status, element] of Object.entries(statusElements)) {
-        if (uniqueStatus.has(status) || uniqueStatus.has("In-Office")) {
+        if (uniqueStatuses.includes(status)) {
           // Remove 'disabled' attribute if it exists and add 'selected'
           element.removeAttribute("disabled");
           element.setAttribute("selected", true);
@@ -388,7 +384,6 @@ export default {
       }
       return Array.from(uniqueStatus); // Return the array
     },
-
     applyFilters(filters) {
       this.filteredEmployees = this.employees.filter(employee => {
         // Check if the country filter exists and matches any of the selected countries

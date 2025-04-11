@@ -21,8 +21,8 @@
           </div>
         </div>
         <div class="col-auto my-auto">
-          <vsud-badge :color="this.$route.query.managerStatus === 'In-Office' ? 'success' : 'secondary'" variant="gradient" size="sm"
-            class="mx-auto">
+          <vsud-badge :color="this.$route.query.managerStatus === 'In-Office' ? 'success' : 'secondary'"
+            variant="gradient" size="sm" class="mx-auto">
             {{ this.$route.query.managerStatus }}
           </vsud-badge>
         </div>
@@ -332,21 +332,19 @@ export default {
       return Array.from(uniqueCountries); // Return the array
     },
     availableStatuss() {
-      // Define each status element
-      const WFH = document.getElementById("WFH");
-      const InOffice = document.getElementById("In-Office");
-
       // Put elements in an object for easier reference
       const statusElements = {
-        WFH,
-        InOffice,
+        WFH: document.getElementById("WFH"),
+        'In-Office': document.getElementById("In-Office"),
       };
 
       // Create a set of unique countries based on employees' countries
-      const uniqueStatus = new Set(this.employees.map(emp => emp.status));
+      const uniqueStatuses = [...new Set(this.employees.map(emp => emp.status))];
+      console.log("Available Status:", uniqueStatuses);
+
       // Iterate over each country element
       for (const [status, element] of Object.entries(statusElements)) {
-        if (uniqueStatus.has(status) || uniqueStatus.has("In-Office")) {
+        if (uniqueStatuses.includes(status)) {
           // Remove 'disabled' attribute if it exists and add 'selected'
           element.removeAttribute("disabled");
           element.setAttribute("selected", true);
@@ -417,7 +415,7 @@ export default {
       console.log("Selected Statuses:", selectedStatus);
       this.applyFilters({ status: selectedStatus, country: selectedCountries });
     },
-    
+
     calculatePercentage(events, today) {
       const hour = today.getHours();
       // Determine if it's am or pm based on the current time

@@ -148,8 +148,8 @@ export default {
         alert("Login Success!")
 
       } catch (error) {
-        alert("Login Failed! Invalid username or password")
-        this.errorMessage = "Invalid username or password";
+        alert("Login Failed! Please try again.")
+        this.errorMessage = "Login may fail occasionally due to free-tier database limitations. Please retry a few times.";
       }
     },
   }
