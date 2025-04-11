@@ -92,7 +92,8 @@ why<template>
               <li class="nav-item" role="presentation">
                 <button class="nav-link active" id="first-tab" data-bs-toggle="tab" data-bs-target="#first"
                   type="button" role="tab" aria-controls="first" aria-selected="true">
-                  <h6 class="mb-1">Teams</h6>
+                  <h6 v-if="role == 3" class="mb-1">Teams</h6>
+                  <h6 v-if="role == 2 || role == 1" class="mb-1">Employees</h6>
                   <p v-if="role == 3" class="text-sm">View WFH schedule of teams in <u>{{ dept }}</u>&nbsp;</p>
                   <p v-if="role == 2 || role == 1" class="text-sm">Viewing WFH status of employees in <u>{{ dept
                       }}</u>&nbsp;</p>
@@ -123,7 +124,7 @@ why<template>
                 </div>
               </div>
               <div class="tab-pane fade show active" id="first" role="tabpanel" aria-labelledby="first-tab"
-                v-if="role == 2 || role == 1">
+                v-if="role === 2 || role === 1">
                 <div class="card-body px-0 pt-0 pb-2">
                   <div class="card-header py-0">
                     <p>Date: <b>{{ selectedDate }}</b> &nbsp; Timeslot: <b>{{ selectedSlot }}</b></p>
@@ -193,7 +194,7 @@ why<template>
           </div>
         </div>
       </div>
-      <div class="col-2" v-if="role != 3">
+      <div class="col-2" v-if="role ===1 || role === 2">
         <div class="mb-4 card">
           <div class="controls-container">
             <smart-tree selection-mode="checkBox" toggle-element-position="far" id="countryFilter"
