@@ -7,10 +7,10 @@ export default function setNavPills() {
     total.forEach(function (item, i) {
       var moving_div = document.createElement('div');
       var first_li = item.querySelector('li:first-child .nav-link');
-      var tab = first_li.cloneNode();
+      // var tab = first_li.cloneNode();
       tab.innerHTML = "-";
 
-      moving_div.classList.add('moving-tab', 'position-absolute', 'nav-link');
+      moving_div.classList.add('moving-tab', 'position-absolute', 'nav-link', 'align-items-center','justify-content-center');
       moving_div.appendChild(tab);
       item.appendChild(moving_div);
 

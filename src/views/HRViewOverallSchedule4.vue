@@ -28,7 +28,7 @@
         </div>
         <div class="mx-auto mt-3 col-lg-6 col-md-6 my-sm-auto ms-sm-auto me-sm-0">
           <div class="nav-wrapper position-relative end-0 d-flex">
-            <!-- <ul class="p-1 bg-transparent nav nav-pills nav-fill me-2" role="tablist" style="flex: 1;">
+            <!-- <ul class="p-1 bg-transparent nav nav-pills nav-fill align-items-center" role="tablist" style="flex: 1;">
               <li class="nav-item">
                 <a class="px-0 py-1 mb-0 nav-link active d-flex align-items-center justify-content-center"
                   href="https://youtu.be/xvFZjo5PgG0?si=4nYC0ikfRvt9xEes">

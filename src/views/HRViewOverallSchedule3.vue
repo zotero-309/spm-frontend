@@ -26,12 +26,12 @@
             {{ this.$route.query.managerStatus }}
           </vsud-badge>
         </div>
-        
+
         <div class="mx-auto mt-3 col-lg-6 col-md-6 my-sm-auto ms-sm-auto me-sm-0">
           <div class="nav-wrapper position-relative end-0 d-flex">
-            <ul class="p-1 bg-transparent nav nav-pills nav-fill me-2" role="tablist" style="flex: 1;">
+            <ul class="p-1 bg-transparent nav nav-pills nav-fill align-items-center" role="tablist" style="flex: 1;">
               <li class="nav-item">
-                <a class="px-0 py-1 mb-0 nav-link active d-flex align-items-center justify-content-center"
+                <a class="nav-link px-3 py-1 mb-0 active d-inline-flex align-items-center justify-content-center bg-white shadow"
                   @click="ViewManagerManagerSchedule()">
                   <svg class="text-dark" width="16px" height="16px" viewBox="0 0 610.398 610.398"
                     xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000"
