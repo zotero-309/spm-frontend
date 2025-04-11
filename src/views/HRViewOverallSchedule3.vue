@@ -623,7 +623,7 @@ export default {
         managerName: this.managerName,
         managerPosition: this.managerPosition,
         mangerRole: this.mangerRole,
-        managerStatus: this.managerStatus,
+        managerStatus: this.$route.query.managerStatus,
         managerDept: this.managerDept,
         selectedDate: new Date().toLocaleDateString('en-CA'),
       };

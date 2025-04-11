@@ -19,22 +19,23 @@
               <div class="mt-8 card card-plain">
                 <div class="pb-0 card-header text-start">
                   <h3 class="font-weight-bolder text-info text-gradient">Welcome back</h3>
-                  <p class="mb-0">Enter your email and password to sign in</p>
+                  <p class="mb-0">Select the role you want to sign in as</p>
                 </div>
                 <div class="card-body">
                   <form role="form" class="text-start" @submit.prevent="login">
-                    <label>Email</label>
-                    <vsud-input type="text" placeholder="Username" name="username" :value="username" @input="username = $event.target.value"  />
+                    <label>Username</label>
+                    <vsud-select type="text" placeholder="Select Username" v-model="username" name="username" :value="username"
+                      :options="[
+                        { value: 'ceo', label: 'CEO' },
+                        { value: 'saleshr', label: 'Human Resource'},
+                        { value: 'salesmanager', label: 'Sales Manager' },
+                        { value: 'salesstaff', label: 'Sales Staff' }
+                      ]"/>
                     <label>Password</label>
-                    <vsud-input type="password" placeholder="Password" name="password" :value="password" @input="password = $event.target.value"  />
+                    <vsud-input type="password" placeholder="Password" name="password" :value="username" readonly/>
                     <vsud-switch id="rememberMe" checked>Remember me</vsud-switch>
                     <div class="text-center">
-                      <vsud-button
-                        class="my-4 mb-2"
-                        variant="gradient"
-                        color="info"
-                        full-width
-                      >Sign in</vsud-button>
+                      <vsud-button class="my-4 mb-2" variant="gradient" color="info" full-width>Sign in</vsud-button>
 
                       <div v-if="errorMessage" class="error-message" style="color: red;">
                         {{ errorMessage }}
@@ -55,13 +56,10 @@
             </div>
             <div class="col-md-6">
               <div class="top-0 oblique position-absolute h-100 d-md-block d-none me-n8">
-                <div
-                  class="bg-cover oblique-image position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6"
-                  :style="{
-                    backgroundImage:
-                      `url(${bgImg})`,
-                  }"
-                ></div>
+                <div class="bg-cover oblique-image position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6" :style="{
+                  backgroundImage:
+                    `url(${bgImg})`,
+                }"></div>
               </div>
             </div>
           </div>
@@ -80,6 +78,7 @@ import Navbar from "@/examples/PageLayout/Navbar.vue";
 import VsudInput from "@/components/VsudInput.vue";
 import VsudSwitch from "@/components/VsudSwitch.vue";
 import VsudButton from "@/components/VsudButton.vue";
+import VsudSelect from "@/components/VsudSelect.vue";
 import bgImg from "@/assets/img/curved-images/curved9.jpg"
 const body = document.getElementsByTagName("body")[0];
 
@@ -91,6 +90,7 @@ export default {
     VsudInput,
     VsudSwitch,
     VsudButton,
+    VsudSelect
   },
   setup() {
     const { proxy } = getCurrentInstance();
@@ -130,7 +130,7 @@ export default {
         // Make an API call to authenticate
         const response = await axios.post(`${this.baseURL}/staff/login`, {
           username: this.username,
-          password: this.password
+          password: this.username
         });
 
         // Assuming the API response contains staff ID on success
@@ -151,7 +151,7 @@ export default {
         alert("Login Failed! Invalid username or password")
         this.errorMessage = "Invalid username or password";
       }
-    }
+    },
   }
 };
 </script>

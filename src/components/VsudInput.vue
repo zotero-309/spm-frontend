@@ -4,17 +4,8 @@
       <span v-if="iconDir === 'left'" class="input-group-text">
         <i :class="getIcon(icon)"></i>
       </span>
-      <input
-        :id="id"
-        :type="type"
-        class="form-control"
-        :class="getClasses(size, valid)"
-        :name="name"
-        :value="value"
-        :placeholder="placeholder"
-        :isRequired="isRequired"
-        @input="$emit($event.target.value )"
-      />
+      <input :id="id" :type="type" class="form-control" :class="getClasses(size, valid)" :name="name" :value="value"
+        :placeholder="placeholder" :isRequired="isRequired" :readonly="readonly" @input="$emit($event.target.value)" />
       <span v-if="iconDir === 'right'" class="input-group-text">
         <i :class="getIcon(icon)"></i>
       </span>
@@ -63,6 +54,7 @@ export default {
       default: ""
     },
     isRequired: Boolean,
+    readonly: Boolean,
   },
   methods: {
     getClasses: (size, valid) => {

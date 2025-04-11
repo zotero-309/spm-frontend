@@ -103,10 +103,10 @@
                   <div class="row">
                     <div v-for="(employee, index) in employees" :key="employee.id"
                       class="mb-4 col-xl-3 col-md-6 mb-xl-0">
-                      
+                      {{ employee.status }}
                       <projects-card :img="images[employee.dept]" :number="index + 1" :title="employee.dept"
                         scheduleLink="/HRViewOverallSchedule2" :managerId="employee.id" :managerName="employee.name"
-                        :managerPosition="employee.position" :managerRole="employee.role" 
+                        :managerPosition="employee.position" :managerRole="employee.role" :managerStatus="employee.status" 
                         :img-team1="team1" title-team1="Elena Morison" :img-team2="team2" title-team2="Ryan Milly"
                         :img-team3="team3" title-team3="Nick Daniel" :img-team4="team4" title-team4="Peterson"
                         class="pb-4" />

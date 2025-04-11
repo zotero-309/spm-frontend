@@ -45,10 +45,10 @@ export default {
       type: String,
       default: ""
     },
-    projectTitleLink: {
-      type: String,
-      default: "https://youtu.be/xvFZjo5PgG0?si=4nYC0ikfRvt9xEes"
-    },
+    // projectTitleLink: {
+    //   type: String,
+    //   default: "https://youtu.be/xvFZjo5PgG0?si=4nYC0ikfRvt9xEes"
+    // },
     scheduleLink: {  // Accept a function as a prop
       type: String, // add relative path
       default: ""
@@ -62,6 +62,10 @@ export default {
       default: ''
     },
     managerPosition: { // New prop for dynamic managerPosition
+      type: String,
+      default: ''
+    },
+    managerStatus:{
       type: String,
       default: ''
     },
@@ -121,7 +125,8 @@ export default {
         managerid: this.managerId,
         managerName: this.managerName,
         managerPosition: this.managerPosition,
-        managerRole: this.managerRole
+        managerRole: this.managerRole,
+        managerStatus: this.managerStatus
       };
 
       // Use Vue Router to navigate with query parameters

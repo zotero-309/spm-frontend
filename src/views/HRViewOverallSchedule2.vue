@@ -79,7 +79,7 @@ why<template>
   </div>
   <div class="py-4 container-fluid">
     <div class="mt-4 row">
-      <div :class="role == 3 ? 'col-12' : 'col-10'">
+      <div :class="role == 3 || role == 1 ? 'col-12' : 'col-10'">
         <div class="mb-4 card">
           <div class="py-4 container-fluid">
             <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
@@ -109,7 +109,7 @@ why<template>
                       class="mb-4 col-xl-3 col-md-6 mb-xl-0">
                       <projects-card :img="images[employee.dept]" :number="index + 1" :title="employee.name"
                         scheduleLink="/HRViewOverallSchedule3" :managerId="employee.id" :managerName="employee.name"
-                        :managerPosition="employee.position" :managerRole="employee.role" :img-team1="team1"
+                        :managerPosition="employee.position" :managerRole="employee.role" :managerStatus="employee.status" :img-team1="team1"
                         title-team1="Elena Morison" :img-team2="team2" title-team2="Ryan Milly" :img-team3="team3"
                         title-team3="Nick Daniel" :img-team4="team4" title-team4="Peterson" class="pb-4" />
                     </div>
@@ -694,8 +694,8 @@ export default {
         managerName: this.managerName,
         managerPosition: this.managerPosition,
         mangerRole: this.mangerRole,
-        managerStatus: this.managerStatus,
-        managerDept: this.managerDept,
+        managerStatus: this.$route.query.managerStatus,
+        managerDept: this.$route.query.managerDept,
         selectedDate: new Date().toLocaleDateString('en-CA'),
       };
 
