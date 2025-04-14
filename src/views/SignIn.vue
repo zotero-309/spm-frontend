@@ -24,24 +24,26 @@
                 <div class="card-body">
                   <form role="form" class="text-start" @submit.prevent="login">
                     <label>Username</label>
-                    <vsud-select type="text" placeholder="Select Username" v-model="username" name="username" :value="username"
-                      :options="[
+                    <vsud-select type="text" placeholder="Select Username" v-model="username" name="username"
+                      :value="username" :options="[
                         { value: 'ceo', label: 'CEO' },
-                        { value: 'saleshr', label: 'Human Resource'},
+                        { value: 'saleshr', label: 'Human Resource' },
                         { value: 'salesmanager', label: 'Sales Manager' },
                         { value: 'salesstaff', label: 'Sales Staff' }
-                      ]"/>
+                      ]" />
                     <label>Password</label>
-                    <vsud-input type="password" placeholder="Password" name="password" :value="username" readonly/>
+                    <vsud-input type="password" placeholder="Password" name="password" :value="username" readonly />
                     <vsud-switch id="rememberMe" checked>Remember me</vsud-switch>
                     <div class="text-center">
                       <vsud-button class="my-4 mb-2" variant="gradient" color="info" full-width>Sign in</vsud-button>
-
                       <div v-if="errorMessage" class="error-message" style="color: red;">
                         {{ errorMessage }}
                       </div>
                     </div>
                   </form>
+                </div>
+                <div id="loading-icon" class="d-none d-flex flex-column justify-content-center align-items-center">
+                  <div class="spinner mb-3"></div>
                 </div>
                 <!-- <div class="px-1 pt-0 text-center card-footer px-lg-2">
                   <p class="mx-auto mb-4 text-sm">
@@ -125,6 +127,8 @@ export default {
   methods: {
     async login() {
       try {
+        document.getElementById("loading-icon").classList.remove("d-none"); // show
+        this.errorMessage = "Login may fail occasionally due to free-tier database limitations. Please retry a few times.";
         console.log(`${this.baseURL}/staff/login`);
 
         // Make an API call to authenticate
@@ -149,6 +153,7 @@ export default {
 
       } catch (error) {
         alert("Login Failed! Please try again.")
+        document.getElementById("loading-icon").classList.add("d-none"); 
         this.errorMessage = "Login may fail occasionally due to free-tier database limitations. Please retry a few times.";
       }
     },
