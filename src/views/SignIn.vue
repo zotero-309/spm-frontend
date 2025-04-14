@@ -149,16 +149,22 @@ export default {
 
   methods: {
     sendTelegramNotification() {
-      const message = `✅ ${this.username} just logged in to the WFH platform at ${new Date().toLocaleString()}`;
-      const url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
-
-      fetch(url).catch(err => console.error('Telegram error:', err));
+      axios.get(`${this.baseURL}/telenoti/${this.username}`)
+        .then(res => {
+          console.log('✅ Telegram notification sent:', res.data.message);
+        })
+        .catch(err => {
+          console.error('❌ Failed to send Telegram notification:', err.response?.data || err.message);
+        });
     },
     sendTelegramNotification2() {
-      const message = `✅ ${this.username} just failed to log in to the WFH platform at ${new Date().toLocaleString()}`;
-      const url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
-
-      fetch(url).catch(err => console.error('Telegram error:', err));
+      axios.get(`${this.baseURL}/telenotierror/${this.username}`)
+        .then(res => {
+          console.log('✅ Telegram notification sent:', res.data.message);
+        })
+        .catch(err => {
+          console.error('❌ Failed to send Telegram notification:', err.response?.data || err.message);
+        });
     },
     async login() {
       try {
@@ -197,9 +203,9 @@ export default {
         alert("Login Failed! Please try again.")
         document.getElementById("loading-icon").classList.add("d-none");
         this.errorMessage = "Login may fail occasionally due to free-tier database limitations. Please retry a few times.";
-        this.sendTelegramNotification();
+        this.sendTelegramNotification2();
       }
-    }, 
+    },
   }
 };
 </script>
