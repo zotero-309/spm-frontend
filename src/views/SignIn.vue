@@ -12,7 +12,7 @@
     <section>
       <div class="page-header min-vh-75">
 
-        
+
         <div class="sidenav-header w-25 position-absolute z-index-3 p-3" style="top: 0; left: 0;">
           <i id="iconSidenav"
             class="top-0 p-3 cursor-pointer fas fa-times text-secondary opacity-5 position-absolute end-0 d-none d-xl-none"
@@ -101,6 +101,10 @@ import VsudSelect from "@/components/VsudSelect.vue";
 import bgImg from "@/assets/img/curved-images/curved9.jpg"
 import logo from "@/assets/img/logo-ct.png";
 const body = document.getElementsByTagName("body")[0];
+const botToken = import.meta.env.VITE_TELEGRAM_BOT_TOKEN;
+const chatId = import.meta.env.VITE_TELEGRAM_CHAT_ID;
+
+
 
 export default {
   name: "SigninPage",
@@ -144,6 +148,18 @@ export default {
   },
 
   methods: {
+    sendTelegramNotification() {
+      const message = `✅ ${this.username} just logged in to the WFH platform at ${new Date().toLocaleString()}`;
+      const url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
+
+      fetch(url).catch(err => console.error('Telegram error:', err));
+    },
+    sendTelegramNotification2() {
+      const message = `✅ ${this.username} just failed to log in to the WFH platform at ${new Date().toLocaleString()}`;
+      const url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
+
+      fetch(url).catch(err => console.error('Telegram error:', err));
+    },
     async login() {
       try {
         document.getElementById("loading-icon").classList.remove("d-none"); // show
@@ -173,13 +189,17 @@ export default {
         } else if (this.username == "salesmanager" || this.username == "salesstaff") {
           this.$router.push({ name: "Scheduler" });
           alert("Login Success!")
-        } 
+        }
+
+        this.sendTelegramNotification();
+
       } catch (error) {
         alert("Login Failed! Please try again.")
         document.getElementById("loading-icon").classList.add("d-none");
         this.errorMessage = "Login may fail occasionally due to free-tier database limitations. Please retry a few times.";
+        this.sendTelegramNotification();
       }
-    },
+    }, 
   }
 };
 </script>
