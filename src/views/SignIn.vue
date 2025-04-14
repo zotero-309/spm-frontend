@@ -167,9 +167,13 @@ export default {
 
 
         // Redirect to the main page (or another route)
-        this.$router.push({ name: "Scheduler" });
-        alert("Login Success!")
-
+        if (this.username == "ceo" || this.username == "saleshr") {
+          this.$router.push({ name: "HRViewOverallSchedule1" });
+          alert("Login Success!")
+        } else if (this.username == "salesmanager" || this.username == "salesstaff") {
+          this.$router.push({ name: "Scheduler" });
+          alert("Login Success!")
+        } 
       } catch (error) {
         alert("Login Failed! Please try again.")
         document.getElementById("loading-icon").classList.add("d-none");
