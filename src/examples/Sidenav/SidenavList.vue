@@ -47,7 +47,7 @@
       </li>
 
       <li class="nav-item" v-if="showReportScheduleAndWFHRequest">
-        <sidenav-collapse nav-text="WFHRequest" :to="{ name: 'WFHrequest' }">
+        <sidenav-collapse nav-text="WFH Requests" :to="{ name: 'WFHrequest' }">
           <template #icon>
             <icon name="dashboard" />
           </template>

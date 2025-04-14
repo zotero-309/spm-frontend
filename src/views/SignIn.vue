@@ -2,17 +2,34 @@
   <!-- <div class="container top-0 position-sticky z-index-sticky">
     <div class="row">
       <div class="col-12">
-        <navbar
-          is-blur="blur blur-rounded my-3 py-2 start-0 end-0 mx-4 shadow"
-          btn-background="bg-gradient-success"
-          :dark-mode="true"
-        />
+        <navbar is-blur="blur blur-rounded my-3 py-2 start-0 end-0 mx-4 shadow" btn-background="bg-gradient-success"
+          :dark-mode="true" />
       </div>
     </div>
   </div> -->
+
   <main class="mt-0 main-content main-content-bg">
     <section>
       <div class="page-header min-vh-75">
+
+        
+        <div class="sidenav-header w-25 position-absolute z-index-3 p-3" style="top: 0; left: 0;">
+          <i id="iconSidenav"
+            class="top-0 p-3 cursor-pointer fas fa-times text-secondary opacity-5 position-absolute end-0 d-none d-xl-none"
+            aria-hidden="true"></i>
+          <a class="m-0 navbar-brand justify-content-center d-flex align-items-center" href="/">
+            <div class="justify-content-center d-flex align-items-center">
+              <img :src="logo" alt="main_logo" style="height: 40px; width: 40px;" />
+            </div>
+            <div class="mx-3 d-flex flex-column justify-content-end">
+              <div>
+                <span class="font-weight-bold text-wrap">Work from Home Scheduling Platform</span>
+              </div>
+            </div>
+          </a>
+        </div>
+
+
         <div class="container">
           <div class="row">
             <div class="mx-auto col-xl-4 col-lg-5 col-md-6 d-flex flex-column">
@@ -82,6 +99,7 @@ import VsudSwitch from "@/components/VsudSwitch.vue";
 import VsudButton from "@/components/VsudButton.vue";
 import VsudSelect from "@/components/VsudSelect.vue";
 import bgImg from "@/assets/img/curved-images/curved9.jpg"
+import logo from "@/assets/img/logo-ct.png";
 const body = document.getElementsByTagName("body")[0];
 
 export default {
@@ -106,7 +124,8 @@ export default {
       bgImg,
       username: "",
       password: "",
-      errorMessage: null
+      errorMessage: null,
+      logo
     }
   },
   beforeMount() {
@@ -153,7 +172,7 @@ export default {
 
       } catch (error) {
         alert("Login Failed! Please try again.")
-        document.getElementById("loading-icon").classList.add("d-none"); 
+        document.getElementById("loading-icon").classList.add("d-none");
         this.errorMessage = "Login may fail occasionally due to free-tier database limitations. Please retry a few times.";
       }
     },

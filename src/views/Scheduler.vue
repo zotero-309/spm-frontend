@@ -7,9 +7,9 @@
       </div>
       <div class="content">
         <section id="sideA">
-          <div class="button-container">
+          <!-- <div class="button-container">
             <div id="logo"></div>
-          </div>
+          </div> -->
           <div class="controls-container">
             <smart-calendar id="calendar"></smart-calendar>
             <smart-tree id="tree" selection-mode="checkBox" toggle-element-position="far">
