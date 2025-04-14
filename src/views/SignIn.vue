@@ -149,7 +149,7 @@ export default {
 
   methods: {
     sendTelegramNotification() {
-      axios.get(`${this.baseURL}/telenoti/${this.username}`)
+      axios.get(`${this.baseURL}/monitoring/telenoti/${this.username}`)
         .then(res => {
           console.log('✅ Telegram notification sent:', res.data.message);
         })
@@ -158,7 +158,7 @@ export default {
         });
     },
     sendTelegramNotification2() {
-      axios.get(`${this.baseURL}/telenotierror/${this.username}`)
+      axios.get(`${this.baseURL}/monitoring/telenotierror/${this.username}`)
         .then(res => {
           console.log('✅ Telegram notification sent:', res.data.message);
         })
