@@ -85,7 +85,7 @@ why<template>
   </div>
   <div class="py-4 container-fluid">
     <div class="mt-4 row">
-      <div :class="role == 3 || role == 1 ? 'col-12' : 'col-10'">
+      <div :class="(role == 3 || (role == 1 && dept != 'HR Department')) ? 'col-12' : 'col-10'">
         <div class="mb-4 card">
           <div class="py-4 container-fluid">
             <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">

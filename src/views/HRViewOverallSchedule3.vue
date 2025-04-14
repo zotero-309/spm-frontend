@@ -338,18 +338,18 @@ export default {
         'In-Office': document.getElementById("In-Office"),
       };
 
-      // Create a set of unique countries based on employees' countries
+      // Create a set of unique status based on employees' status
       const uniqueStatuses = [...new Set(this.employees.map(emp => emp.status))];
       console.log("Available Status:", uniqueStatuses);
 
-      // Iterate over each country element
+      // Iterate over each status element
       for (const [status, element] of Object.entries(statusElements)) {
         if (uniqueStatuses.includes(status)) {
           // Remove 'disabled' attribute if it exists and add 'selected'
           element.removeAttribute("disabled");
           element.setAttribute("selected", true);
         } else {
-          // If the country is not in uniqueCountries, ensure it’s disabled
+          // If the country is not in unique, ensure it’s disabled
           element.setAttribute("disabled", true);
           element.removeAttribute("selected");
         }
