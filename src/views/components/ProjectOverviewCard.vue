@@ -6,7 +6,7 @@
       </a>
     </div>
     <div class="px-1 pb-0 card-body">
-      <p class="mb-2 text-sm text-gradient text-dark">Team #{{ number }}</p>
+      <!-- <p class="mb-2 text-sm text-gradient text-dark">Team #{{ number }}</p> -->
       <a :href="projectTitleLink">
         <h5>{{ title }}</h5>
       </a>

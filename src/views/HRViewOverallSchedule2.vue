@@ -419,7 +419,8 @@ export default {
         "0.4": "Vietnam"
       };
       const selectedCountries = selectedIndexes.map(index => indexToCountryMap[index]).filter(Boolean);
-
+      this.applyFilters({ country: selectedCountries });
+      
       const statusFilter = document.getElementById("statusFilter");
       if (!statusFilter) {
         console.error("Status filter element not found.");
