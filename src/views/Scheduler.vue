@@ -206,6 +206,7 @@ export default {
         })
         .catch(error => {
           console.error("Error fetching schedule data:", error);
+          setInterval(function () { location.reload(); });
         });
 
       // [Settings] - calendar on side A configuration code --------------------------------------------------------
@@ -745,7 +746,7 @@ export default {
               // The request was made and the server responded with a status code out of the 2xx range
               console.log('Error status:', error.response.status);
               console.log('Error response data:', error.response.data);
-              alert('Error - ' + error.response.data);
+              alert('Error - ' + JSON.stringify(error.response.data));
               setInterval(function () { location.reload(); }, 1000); // 1000 milliseconds = 1 second
             }
           })

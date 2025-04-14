@@ -72,8 +72,8 @@
                                                 {{ formatDate(employee.listofschedule[0].dateStart) }} ({{ employee.listofschedule[0].label }})
                                             </p>
                                             <!-- Display for recurring schedules -->
-                                            <p v-else @click="toggleExpand(employee.application_id)" style="cursor: pointer; margin-bottom: 0;">
-                                                {{ expandedRows[employee.application_id] ? 'Hide Details' : 'Recurring (Click for more details)' }}
+                                            <p v-else @click="toggleExpand(employee.application_id)" style="cursor: pointer; margin-bottom: 0;" class="text-center text-decoration-underline transition-hover">
+                                                {{ expandedRows[employee.application_id] ? 'Hide Details' : 'Recurring Dates' }}
                                             </p>
                                             <!-- Expanded view for recurring schedules -->
                                             <ul v-show="expandedRows[employee.application_id]" class="list-unstyled mt-1 ml-3">
@@ -88,7 +88,7 @@
                                 <!-- Column: Display the request type (Approval or Withdrawal) -->
                                 <td class="align-middle text-center text-sm">
                                     <!-- Apply badge style based on status -->
-                                    <vsud-badge :color="employee.status === 'Pending_Approval' ? 'success' : 'secondary'" variant="gradient" size="sm">
+                                    <vsud-badge :color="employee.listofschedule[0].class === 'Pending_Approval' ? 'secondary' : 'dark'" variant="gradient" size="sm">
                                         <!-- Show "WFH Application" if pending approval, otherwise show "WFH Withdrawal" -->
                                         <span v-if="employee.listofschedule[0].class === 'Pending_Approval'">WFH
                                             Application</span>
@@ -101,7 +101,7 @@
                                     <div class="d-flex px-3 py-1">
                                         <div class="d-flex flex-column justify-content-center">
                                             <!-- Display the description (reason) provided by the employee -->
-                                            <p class="mb-0 text-sm">{{ employee.listofschedule[0].description }}</p>
+                                            <p class="mb-0 text-sm" style="white-space: normal;">{{ employee.listofschedule[0].description }}</p>
                                         </div>
                                     </div>
                                 </td>
@@ -112,8 +112,8 @@
                                         <div class="d-flex flex-column justify-content-center">
 
                                             <!-- Check if the schedule is recurring -->
-                                            <p v-if="employee.listofschedule.length > 1" @click="toggleExpand(employee.application_id)" style="cursor: pointer; margin-bottom: 0;">
-                                                {{ expandedRows[employee.application_id] ? 'Hide Details' : 'Recurring (Click for more details)' }}
+                                            <p v-if="employee.listofschedule.length > 1" @click="toggleExpand(employee.application_id)" style="cursor: pointer; margin-bottom: 0;" class="text-center text-decoration-underline transition-hover">
+                                                {{ expandedRows[employee.application_id] ? 'Hide Details' : 'Recurring Dates' }} 
                                             </p>
 
                                             <!-- If the schedule is expanded and recurring, hide the recurring message -->
@@ -148,11 +148,11 @@
                                     <div class="d-flex px-3 py-1">
                                         <p style="margin-bottom: 0;">
                                             <!-- Approve Button -->
-                                            <button class="btn btn-secondary btn-sm"
+                                            <button class="btn btn-success btn-sm"
                                                 style="margin-bottom: 0;"
                                                 @click="ApproveTheApplication(employee)">Approve</button>&nbsp;
                                             <!-- Reject Button -->
-                                            <button class="btn btn-secondary btn-sm" style="margin-bottom: 0;"
+                                            <button class="btn btn-danger btn-sm" style="margin-bottom: 0;"
                                                 @click="RejectTheApplication(employee)">
                                                 Reject</button>
                                         </p>
@@ -324,7 +324,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 
 .loading {
     position: fixed;
@@ -373,4 +373,13 @@ export default {
 .v-icon {
     vertical-align: middle;
 }
+
+.transition-hover {
+  transition: all 0.3s ease;
+}
+
+.transition-hover:hover {
+  opacity: 0.6;
+}
+
 </style>
