@@ -173,6 +173,8 @@ import VsudProgress from "@/components/VsudProgress.vue";
 import VsudBadge from "@/components/VsudBadge.vue";
 import setNavPills from "@/assets/js/nav-pills.js";
 import setTooltip from "@/assets/js/tooltip.js";
+import introJs from 'intro.js';
+import 'intro.js/introjs.css';
 
 
 export default {
@@ -237,6 +239,48 @@ export default {
     console.log("you're logged in as:", staff_id, role)
   },
   methods: {
+    startTutorial() {
+      introJs()
+        .setOptions({
+          steps: [
+            {
+              element: '.page-header',
+              intro: 'Welcome to the dashboard! This is the header with a background image and mask.',
+            },
+            {
+              element: '.avatar-xl',
+              intro: 'This is Jack Sim, the CEO. You can see his profile picture and role here.',
+            },
+            {
+              element: 'vsud-badge',
+              intro: 'This badge shows the current status of the manager — In-Office or WFH.',
+            },
+            {
+              element: '.nav-pills',
+              intro: 'Use these buttons to view the manager’s schedule or navigate through different sections.',
+            },
+            {
+              element: '#first-tab',
+              intro: 'This tab shows department-based schedules for your employees.',
+            },
+            {
+              element: '#second-tab',
+              intro: 'This tab shows the overall WFH schedule in a calendar view.',
+            },
+            {
+              element: '#schedulerhro1',
+              intro: 'Here is the scheduler. Click on any event to view details for that day and slot.',
+            }
+          ],
+          showProgress: true,
+          exitOnOverlayClick: false,
+          nextLabel: 'Next ➜',
+          prevLabel: '⬅ Prev',
+          skipLabel: 'Skip Tutorial',
+          doneLabel: 'Finish'
+        })
+        .start();
+    },
     async fetchEmployeeData() {
       try {
         const response = await axios.get(`${this.$baseURL}/schedule/manageremployeelist/130002`);
@@ -441,6 +485,11 @@ export default {
     setTooltip();
     this.fetchEmployeeData2(); // Fetch employee data when component is mounted
     this.fetchEmployeeData(); // Fetch employee data when component is mounted
+    // Ask user if they want to start tutorial
+    // Delay the tutorial by 1 second to allow content to load
+    setTimeout(() => {
+      this.startTutorial();
+    }, 1000); // 1000ms = 1 second
   },
   beforeUnmount() {
     this.$store.state.isAbsolute = false;
